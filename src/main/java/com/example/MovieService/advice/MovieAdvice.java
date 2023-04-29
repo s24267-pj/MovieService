@@ -10,6 +10,6 @@ public class MovieAdvice {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("Movie not found. Exception message: " + ex.getLocalizedMessage());
+                .body("Movie not found.");
     }
 }

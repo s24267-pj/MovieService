@@ -1,21 +1,21 @@
 package com.example.MovieService.model;
 
 public class Movie {
-    private long id;
+    private int id;
     private String name;
     private Categories category;
 
-    public Movie(long id, String name, Categories category) {
+    public Movie(int id, String name, Categories category) {
         this.id = id;
         this.name = name;
         this.category = category;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
