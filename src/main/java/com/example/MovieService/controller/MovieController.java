@@ -28,9 +28,25 @@ public class MovieController {
         Movie responseText = movieService.findMovie(id);
         return ResponseEntity.ok(responseText);
     }
-/*    @PostMapping()
-    public ResponseEntity<Movie> addNewMovie(@RequestBody Movie movie){
 
-    }*/
+    @PostMapping
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        if (movie.getName() == null || movie.getCategory() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        movieService.addMovie(movie);
+        return ResponseEntity.ok(movie);
+    }
 
+    @PutMapping("/movies/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
+        try {
+            Movie existingMovie = movieService.findMovie(id);
+            existingMovie.setName(movie.getName());
+            existingMovie.setCategory(movie.getCategory());
+            return ResponseEntity.ok(existingMovie);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

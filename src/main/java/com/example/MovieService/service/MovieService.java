@@ -10,20 +10,27 @@ import java.util.List;
 @Service
 public class MovieService {
 
+    private final List<Movie> movieList;
+
+    public MovieService() {
+        this.movieList = new ArrayList<>();
+    }
 
     public List<Movie> getAllMovies() {
-        return List.of();
+        return movieList;
     }
 
     public Movie findMovie(long id) {
-        List<Movie> movieList = new ArrayList<>();
-        movieList.add(new Movie(10, "Polik", Categories.HORROR));
         for (Movie movie : movieList) {
             if (movie.getId() == id) {
-                return movieList.get(movieList.indexOf(id));
+                return movie;
             }
         }
-        throw new RuntimeException();
+        throw new RuntimeException("Movie not found");
+    }
+
+    public void addMovie(Movie movie) {
+        movieList.add(movie);
     }
 
 }
