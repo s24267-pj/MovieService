@@ -2,6 +2,7 @@ package com.example.MovieService.service;
 
 import com.example.MovieService.model.Movie;
 import com.example.MovieService.repository.MovieRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +42,12 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public void addMovie(Movie movie){
-        movieRepository.save(movie);
+    public Movie addMovie(Movie movie){
+        return movieRepository.save(movie);
+    }
+
+    public ResponseEntity<Void> deleteMovie(Long id){
+        movieRepository.deleteById(id);
+        return null;
     }
 }

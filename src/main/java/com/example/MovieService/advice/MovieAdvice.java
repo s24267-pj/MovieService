@@ -12,9 +12,9 @@ public class MovieAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("Movie not found.");
     }
-
-    /*@ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleException(Exception exception){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong arguments.");
+    /*@ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Movie not found.");
     }*/
 }

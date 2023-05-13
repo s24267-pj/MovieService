@@ -28,6 +28,7 @@ public class MovieController {
         Optional<Movie> responseText = movieService.findById(id);
         return ResponseEntity.ok(responseText);
     }
+
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         if (movie.getName() == null || movie.getCategory() == null) {
@@ -49,4 +50,8 @@ public class MovieController {
         }
     }
 
+    @DeleteMapping("/movies/{id}")
+    public ResponseEntity<Void> deleteMovieById(@PathVariable Long id){
+        return movieService.deleteMovie(id);
+    }
 }
