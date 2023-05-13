@@ -2,11 +2,11 @@ package com.example.MovieService.controller;
 
 import com.example.MovieService.model.Movie;
 import com.example.MovieService.service.MovieService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
@@ -24,11 +24,10 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
-        Movie responseText = movieService.findMovie(id);
+    public ResponseEntity<Optional<Movie>> getMovieById(@PathVariable Long id) {
+        Optional<Movie> responseText = movieService.findById(id);
         return ResponseEntity.ok(responseText);
     }
-
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         if (movie.getName() == null || movie.getCategory() == null) {
@@ -39,9 +38,9 @@ public class MovieController {
     }
 
     @PutMapping("/movies/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         try {
-            Movie existingMovie = movieService.findMovie(id);
+            Movie existingMovie = movieService.findById(id).get();
             existingMovie.setName(movie.getName());
             existingMovie.setCategory(movie.getCategory());
             return ResponseEntity.ok(existingMovie);
@@ -49,4 +48,5 @@ public class MovieController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

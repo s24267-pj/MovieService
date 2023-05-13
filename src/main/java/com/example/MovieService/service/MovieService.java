@@ -1,36 +1,47 @@
 package com.example.MovieService.service;
 
-import com.example.MovieService.model.Categories;
 import com.example.MovieService.model.Movie;
+import com.example.MovieService.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
 
-    private final List<Movie> movieList;
 
-    public MovieService() {
-        this.movieList = new ArrayList<>();
-    }
-
-    public List<Movie> getAllMovies() {
-        return movieList;
+/*    public List<Movie> getAllMovies() {
+        return List.of();
     }
 
     public Movie findMovie(long id) {
+        List<Movie> movieList = new ArrayList<>();
+        movieList.add(new Movie(10, "Polik", Categories.HORROR));
         for (Movie movie : movieList) {
             if (movie.getId() == id) {
-                return movie;
+                return movieList.get(movieList.indexOf(id));
             }
         }
-        throw new RuntimeException("Movie not found");
+        throw new RuntimeException();
+    }*/
+
+    private final MovieRepository movieRepository;
+
+
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
-    public void addMovie(Movie movie) {
-        movieList.add(movie);
+    public Optional<Movie> findById(Long id) {
+        return movieRepository.findById(id);
     }
 
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll();
+    }
+
+    public void addMovie(Movie movie){
+        movieRepository.save(movie);
+    }
 }
