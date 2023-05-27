@@ -51,7 +51,15 @@ public class MovieController {
     }
 
     @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Void> deleteMovieById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteMovieById(@PathVariable Long id) {
         return movieService.deleteMovie(id);
+    }
+
+    @PutMapping("/available/{id}")
+    public Movie setMovieAvailable(@PathVariable Long id, @RequestBody Movie movie) {
+
+        Optional<Movie> currentMovie = movieService.findById(id);
+        movie.setIsAvailable(true);
+        return movieService.setToAvailable();
     }
 }

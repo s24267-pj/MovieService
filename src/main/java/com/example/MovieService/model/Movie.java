@@ -1,6 +1,7 @@
 package com.example.MovieService.model;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 
 @Entity
 public class Movie {
@@ -11,10 +12,13 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Categories category;
 
-    public Movie(long id, String name, Categories category) {
+    private boolean isAvailable;
+
+    public Movie(long id, String name, Categories category, boolean isAvailable) {
         this.id = id;
         this.name = name;
         this.category = category;
+        this.isAvailable = isAvailable;
     }
 
     public Movie() {
@@ -43,5 +47,13 @@ public class Movie {
 
     public void setCategory(Categories category) {
         this.category = category;
+    }
+
+    public void setIsAvailable(boolean available) {
+        this.isAvailable = available;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 }

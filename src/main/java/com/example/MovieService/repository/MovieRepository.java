@@ -17,5 +17,5 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 @Query("select movie from Movie movie")
     List<Movie> findAll();
 
-
+Movie save(Movie movie);
 }

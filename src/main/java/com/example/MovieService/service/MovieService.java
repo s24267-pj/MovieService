@@ -50,4 +50,7 @@ public class MovieService {
         movieRepository.deleteById(id);
         return null;
     }
+    public Movie setToAvailable(Movie movie){
+        return movieRepository.save(movie);
+    }
 }
